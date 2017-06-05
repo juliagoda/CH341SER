@@ -152,5 +152,38 @@ And now we must to choose our port's name. My port's name is ttyUSB0.
 
 ![Choose of port's name](images/arduino_change3.png)
 
+<br/>
+<br/>
+<br/>
+
+#### Why we wanted arduino-avr-core package from official repo to be removed? Let's check it out.  
+
+`sudo pacman -S arduino-avr-core`
+
+<br/>
+
+and let's reopen our Arduino IDE and check out boards list.  
+
+<br/>
+
+![New label have been added to boards list](images/arduino_change4.png)
+
+<br/>
+
+New label "Arch Linux Arduino AVR Boards" with boards has been added to boards list. It has the same options, so let's choose "Arduino/Genuino Uno" from a new part and upload our code to Arduino UNO R3 Clone.
+
+<br/>
+
+![The same option has been checked in new part](images/arduino_change5.png)
+
+<br/>
+
+![Upload with error](images/arduino_change6.png)
+
+<br/>
+
+It hasn't worked. I think that the package was created for original arduino boards, which are not compatible with their clones. If you want to have installed the package and work on clone of Arduino, better choose the same option from part labeled "Arduino AVR Boards".
+
+
 
 
