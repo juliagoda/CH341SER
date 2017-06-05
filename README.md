@@ -67,7 +67,7 @@ if your system detects the package below:
 
 <br/>
 
-you should to remove it:  
+you should remove it:  
 `sudo pacman -R arduino-avr-core`
 
 <br/>
@@ -79,7 +79,7 @@ gpasswd -a $USER lock
 ```
 <br/>
 
-it's possible that you have to load module:  
+it's possible, that you have to load that module:  
 `modprobe cdc_acm`
 
 <br/>
@@ -96,7 +96,7 @@ sudo make load
 ```
 <br/>
 
-to be sure, that module will be loaded after reboot, you can change file extension from *.ko to *.ko.gz and add it to drivers path:  
+to be sure, that module will be loaded after reboot, you can change file extension from "*.ko" to "*.ko.gz" and add it to drivers path:  
 ```
 find . -name *.ko | xargs gzip
 sudo cp ch34x.ko.gz /usr/lib/modules/$(uname -r)/kernel/drivers/usb/serial
@@ -117,7 +117,7 @@ sudo depmod -a
 
 <br/>
 
-let's connect arduino uno R3 clone to USB input and check our results:  
+let's connect Arduino UNO R3 Clone to USB input and check our results:  
 `dmesg | grep ch34x`
 
 <br/>
@@ -134,7 +134,7 @@ so our driver ch34x was successfully loaded and our port's name is ttyUSB0
 <br/>
 Let's start our installed Arduino IDE.  
 <br/>
-First we should to install package for Arduino AVR Boards from Boards Manager:  
+First we should install package for Arduino AVR Boards from Boards Manager:  
 
 <br/>
 
@@ -146,7 +146,7 @@ First we should to install package for Arduino AVR Boards from Boards Manager:
 
 <br/>
 
-And now we must to choose our port's name. My port's name is ttyUSB0.  
+And now we must choose our port's name. My port's name is ttyUSB0.  
 
 <br/>
 
@@ -182,7 +182,7 @@ New label "Arch Linux Arduino AVR Boards" with boards has been added to boards l
 
 <br/>
 
-It hasn't worked. I think that the package was created for original arduino boards, which are not compatible with their clones. If you want to have installed the package and work on clone of Arduino, better choose the same option from part labeled "Arduino AVR Boards".
+It hasn't worked. I think, that the package was created for original arduino boards, which are not compatible with their clones. If you want to have installed the package and work on clone of Arduino, better choose the same option from part labeled "Arduino AVR Boards".
 
 
 
