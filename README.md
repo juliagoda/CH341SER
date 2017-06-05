@@ -18,13 +18,14 @@ It's a manufacturer software of standard serial to usb chip marked CH340
 
 ## Changes
 
-Added line 
+Added line  
 `#include <linux/sched/signal.h>`
-which helps fix the problem below:
+which helps fix the problem below:  
 `error: implicit declaration of function ‘signal_pending’; did you mean ‘timer_pending’? [-Werror=implicit-function-declaration]`
 
 <br/>
 <br/>
+
 ## Tests
 
 Tested on:
