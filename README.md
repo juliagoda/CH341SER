@@ -53,7 +53,7 @@ See original readme.txt
 
 ## Tutorial on Arch Linux
 
-<b>Tested for Arduino UNO R3 Clone<b/>  
+Tested for Arduino UNO R3 Clone  
 <br/>
 
 
