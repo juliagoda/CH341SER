@@ -26,11 +26,15 @@ which helps to fix the problem below:
 `error: implicit declaration of function ‘signal_pending’; did you mean ‘timer_pending’? [-Werror=implicit-function-declaration]`
 
 and changed line:
+<br/>
 `wait_queue_t wait;`
+<br/>
 to
+<br/>
 `wait_queue_entry_t wait;`
 <br/>
 which helps to fix next problem below:
+<br/>
 `error: unknown type name ‘wait_queue_t’; did you mean ‘wait_event’?`
 
 <br/>
