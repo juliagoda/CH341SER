@@ -332,29 +332,44 @@ static int set_control_lines( struct usb_serial *serial,
 }
 
 static int ch34x_get_baud_rate( unsigned int baud_rate,
-		unsigned char *a, unsigned char *b )
+		unsigned char *factor, unsigned char *divisor)
 {
-	unsigned long factor = 0;
-	short divisor = 0;
+	unsigned char a;
+	unsigned char b;
+	unsigned long c;
 
-	if( !baud_rate )
-		return -EINVAL;
-
-	factor = (CH34x_BAUDRATE_FACTOR / baud_rate);
-	divisor = CH34x_BAUDRATE_DIVMAX;
-
-	while( (factor > 0xfff0) && divisor ) {
-		factor >>= 3;
-		divisor --;
+	switch ( baud_rate ) {
+	case 921600:
+		a = 0xf3;
+		b = 7;
+		break;
+	case 307200:
+		a = 0xd9;
+		b = 7;
+		break;
+	default:
+		if ( baud_rate > 6000000/255 ) {
+			b = 3;
+			c = 6000000;
+		} else if ( baud_rate > 750000/255 ) {
+			b = 2;
+			c = 750000;
+		} else if (baud_rate > 93750/255) {
+			b = 1;
+			c = 93750;
+		} else {
+			b = 0;
+			c = 11719;
+		}
+		a = (unsigned char)(c / baud_rate);
+		if (a == 0 || a == 0xFF) return -EINVAL;
+		if ((c / a - baud_rate) > (baud_rate - c / (a + 1)))
+			a ++;
+		a = 256 - a;
+		break;
 	}
-
-	if( factor > 0xfff0 )
-		return -EINVAL;
-
-	factor = 0x10000 - factor;
-	*a = (factor & 0xff00) >> 8;
-	*b = divisor;
-
+	*factor = a;
+	*divisor = b;
 	return 0;
 }
 
@@ -446,15 +461,25 @@ static void ch34x_set_termios( struct usb_serial_port *port,
 		dbg_ch34x("%s - stop bits = 1", __func__);
 
 	// Determine the parity
-	if( cflag & PARENB )
-		if( cflag & PARODD ) {
-			reg_value |= (0x08 | 0x00);
-			dbg_ch34x("%s - parity = odd", __func__);
+	if (cflag & PARENB) {
+		if (cflag & CMSPAR) {
+			if (cflag & PARODD) {
+    			reg_value |= (0x28 | 0x00);
+    			dbg_ch34x("%s - parity = mark", __func__);
+			} else {
+    			reg_value |= (0x38 | 0x10);
+    			dbg_ch34x("%s - parity = space", __func__);
+			}
+		} else {
+			if (cflag & PARODD) {
+    			reg_value |= (0x08 | 0x00);
+    			dbg_ch34x("%s - parity = odd", __func__);
+			} else {
+    			reg_value |= (0x18 | 0x10);
+    			dbg_ch34x("%s - parity = even", __func__);
+			}
 		}
-		else {
-			reg_value |= (0x08 | 0x10);
-			dbg_ch34x("%s - parity = even", __func__);
-		}
+	}
 	else
 		dbg_ch34x("%s - parity = none", __func__);
 
