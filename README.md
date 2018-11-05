@@ -38,6 +38,10 @@ which helps to fix next problem below:
 `error: unknown type name ‘wait_queue_t’; did you mean ‘wait_event’?`
 
 <br/>
+Additionally first pull request helped to merge changes for version 1.5 released in 2018-03-18:
+[https://github.com/juliagoda/CH341SER/pull/1](https://github.com/juliagoda/CH341SER/pull/1)
+
+<br/>
 <br/>
 
 ## Tests
@@ -194,8 +198,4 @@ New label "Arch Linux Arduino AVR Boards" with boards has been added to boards l
 
 <br/>
 
-It hasn't worked. I think, that the package was created for original arduino boards, which are not compatible with their clones. If you want to have installed the package and work on clone of Arduino, better choose the same option from part labeled "Arduino AVR Boards".
-
-
-
-
+It didn't work. I think, that the package was created for original arduino boards, which are not compatible with their clones. If you want to have installed the package and work on clone of Arduino, better choose the same option from part labeled "Arduino AVR Boards".
