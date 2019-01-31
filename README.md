@@ -6,6 +6,7 @@
 4. [Installation](#installation)  
 5. [Official website](#official-website)  
 6. [Tutorial on Arch Linux](#tutorial-on-arch-linux)  
+7. [Compatibility](#compatibility)  
 
 <br/>
 <br/>
@@ -199,3 +200,10 @@ New label "Arch Linux Arduino AVR Boards" with boards has been added to boards l
 <br/>
 
 It didn't work. I think, that the package was created for original arduino boards, which are not compatible with their clones. If you want to have installed the package and work on clone of Arduino, better choose the same option from part labeled "Arduino AVR Boards".
+
+<br/>
+<br/>
+
+## Compatibility
+
+This driver is not compatible with the Olimex ESP32-POE rev C board
