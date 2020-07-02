@@ -50,6 +50,7 @@ Additionally first pull request helped to merge changes for version 1.5 released
 Tested on:
 * Arch Linux 4.11.3-1-hardened
 * Arch Linux 4.11.3-1-ARCH
+* Linux Mint 19.3 Cinnamon
 
 <br/>
 <br/>
