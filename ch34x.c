@@ -33,6 +33,9 @@
 #include <linux/usb/serial.h>
 #include <linux/sched/signal.h>
 
+MODULE_LICENSE("GPL");
+MODULE_DESCRIPTION("WCH CH34x USB to serial adaptor driver");
+MODULE_AUTHOR("<tech@wch.cn>");
 
 #define DRIVER_DESC		"WCH CH34x USB to serial adaptor driver"
 #define DRIVER_AUTHOR	"<tech@wch.cn>"
