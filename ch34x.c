@@ -167,11 +167,14 @@ static struct ch34x_buf *ch34x_buf_alloc( unsigned int size )
 		return NULL;
 
 	pb = kmalloc( sizeof(struct ch34x_buf), GFP_KERNEL );
+    
 	if( pb == NULL )
 		return NULL;
 
 	pb->buf_buf = kmalloc( size, GFP_KERNEL );
-	if( pb->buf_buf == NULL ) {
+    
+	if( pb->buf_buf == NULL ) 
+    {
 		kfree(pb);
 		return NULL;
 	}
@@ -234,18 +237,20 @@ static unsigned int ch34x_buf_put( struct ch34x_buf *pb,
 		return 0;
 
 	len = ch34x_buf_space_avail(pb);
-	if( count > len )
-		count = len;
-	else if( count == 0 )
-		return 0;
+    
+	if( count > len ) count = len;
+	else if( count == 0 ) return 0;
 
 	len = pb->buf_buf + pb->buf_size - pb->buf_put;
-	if( count > len ) {
+    
+	if( count > len ) 
+    {
 		memcpy( pb->buf_put, buf, len );
 		memcpy( pb->buf_buf, buf+len, count - len );
 		pb->buf_put = pb->buf_buf + count - len;
 	}
-	else {
+	else 
+    {
 		memcpy( pb->buf_put, buf, count );
 		if( count < len )
 			pb->buf_put += count;
@@ -271,12 +276,15 @@ static unsigned int ch34x_buf_get( struct ch34x_buf *pb,
 		return 0;
 
 	len = pb->buf_buf + pb->buf_size - pb->buf_get;
-	if( count > len ) {
+    
+	if( count > len ) 
+    {
 		memcpy( buf, pb->buf_get, len );
 		memcpy( buf+len, pb->buf_buf, count - len );
 		pb->buf_get = pb->buf_buf + count - len;
 	}
-	else {
+	else 
+    {
 		memcpy( buf, pb->buf_get, count );
 		if( count < len )
 			pb->buf_get += count;
@@ -341,16 +349,22 @@ static int ch34x_get_baud_rate( unsigned int baud_rate,
 	unsigned char b;
 	unsigned long c;
 
-	switch ( baud_rate ) {
+	switch ( baud_rate ) 
+    {
 	case 921600:
+        
 		a = 0xf3;
 		b = 7;
 		break;
+        
 	case 307200:
+        
 		a = 0xd9;
 		b = 7;
 		break;
+        
 	default:
+        
 		if ( baud_rate > 6000000/255 ) {
 			b = 3;
 			c = 6000000;
@@ -364,6 +378,7 @@ static int ch34x_get_baud_rate( unsigned int baud_rate,
 			b = 0;
 			c = 11719;
 		}
+		
 		a = (unsigned char)(c / baud_rate);
 		if (a == 0 || a == 0xFF) return -EINVAL;
 		if ((c / a - baud_rate) > (baud_rate - c / (a + 1)))
@@ -371,6 +386,7 @@ static int ch34x_get_baud_rate( unsigned int baud_rate,
 		a = 256 - a;
 		break;
 	}
+	
 	*factor = a;
 	*divisor = b;
 	return 0;
@@ -386,13 +402,16 @@ static void ch34x_set_termios( struct usb_serial_port *port,
 {
 	struct tty_struct *tty = port->tty;
 #endif
+    
 	struct usb_serial *serial = port->serial;	
 	struct ch34x_private *priv = usb_get_serial_port_data(port);
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,7,1)) //sure
+    
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,7,1)) 
 	struct ktermios *termios = &tty->termios;
 #else
 	struct ktermios *termios = tty->termios;
 #endif
+    
 	unsigned int baud_rate;
 	unsigned int cflag;
 	unsigned long flags;
@@ -404,6 +423,7 @@ static void ch34x_set_termios( struct usb_serial_port *port,
 	unsigned char reg_value = 0;
 	unsigned short value = 0;
 	unsigned short index = 0;
+    
 #if(LINUX_VERSION_CODE < KERNEL_VERSION(3, 11, 0))
 	dbg_ch34x("%s - port:%d", __func__, port->number);
 #else
@@ -546,7 +566,6 @@ static int ch34x_tiocmget( struct usb_serial_port *port,
 	struct ch34x_private *priv = usb_get_serial_port_data(port);
 	unsigned long flags;
 	unsigned int mcr;
-	/*unsigned int msr;*/
 	unsigned int retval;
 
 #if(LINUX_VERSION_CODE < KERNEL_VERSION(3, 11, 0))
@@ -592,56 +611,25 @@ static void ch34x_close( struct usb_serial_port *port,
 	struct ch34x_private *priv = usb_get_serial_port_data(port);
 	unsigned long flags;
 	unsigned int c_cflag;
-	int bps;
-	long timeout;
-	wait_queue_entry_t wait;
 
 #if(LINUX_VERSION_CODE < KERNEL_VERSION(3, 11, 0))
 	dbg_ch34x("%s - port:%d", __func__, port->number);
 #else
 	dbg_ch34x("%s - port:%d", __func__, port->port_number);
 #endif
-//	dbg_ch34x("Addr of priv: 0x%x", priv);
-//	dbg_ch34x("Addr of tty:  0x%x", tty);
-	// wait for data do drain from the buffer
-/*
-	spin_lock_irqsave( &priv->lock, flags );
-	timeout = CH34x_CLOSING_WAIT;
-	init_waitqueue_entry( &wait, current );
-	add_wait_queue( &tty->write_wait, &wait );
-	for(;;) {
-		set_current_state( TASK_INTERRUPTIBLE );
-		if( ch34x_buf_data_avail(priv->buf) == 0 || timeout == 0 || 
-				signal_pending(current) || port->serial->disconnected )
-			break;
-		spin_unlock_irqrestore( &priv->lock, flags );
-		timeout = schedule_timeout( timeout );
-		spin_lock_irqsave( &priv->lock, flags );
-	}
-	set_current_state( TASK_RUNNING );
-	remove_wait_queue( &tty->write_wait, &wait );
-*/
+
 	spin_lock_irqsave( &priv->lock, flags );
 	// clear out any remaining data in the buffer
 	ch34x_buf_clear( priv->buf );
 	spin_unlock_irqrestore( &priv->lock, flags );
 
-/*
-	bps = tty_get_baud_rate( tty );
-	if( bps > 1200 ) 
-		timeout = max( (HZ * 2560) / bps, HZ / 10 );
-	else
-		timeout = 2 * HZ;
-	schedule_timeout_interruptible(timeout);
-*/
 	// shutdown our urbs
 	usb_kill_urb(port->interrupt_in_urb);
 	usb_kill_urb(port->read_urb);
 	usb_kill_urb(port->write_urb);
-	//usb_serial_generic_close(port, filp);
 
 	if( tty ) {
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,7,1)) //sure
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,7,1)) 
 		c_cflag = tty->termios.c_cflag;
 #else
 		c_cflag = tty->termios->c_cflag;
@@ -654,10 +642,6 @@ static void ch34x_close( struct usb_serial_port *port,
 			set_control_lines( port->serial, 0 );
 		}
 	}
-
-//	usb_serial_generic_close(port);
-//	usb_kill_urb(port->interrupt_in_urb);
-
 }
 
 // kernel version 
@@ -1362,8 +1346,3 @@ static void __exit ch34x_exit(void)
 
 module_init( ch34x_init );
 module_exit( ch34x_exit );
-
-
-MODULE_DESCRIPTION(DRIVER_DESC);
-MODULE_AUTHOR(DRIVER_AUTHOR);
-MODULE_LICENSE("GPL");
