@@ -31,7 +31,12 @@
 //#include <linux/uaccess.h>
 #include <linux/usb.h>
 #include <linux/usb/serial.h>
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4,11,0)
+#include <linux/signal.h>
+#else
 #include <linux/sched/signal.h>
+#endif
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("WCH CH34x USB to serial adaptor driver");
