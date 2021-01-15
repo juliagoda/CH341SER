@@ -49,8 +49,9 @@ added version check of kernel for signal.h:
 #endif
 ```
 <br/>
-Thanks to hesaputra - #10
+Thanks to hesaputra - #10  
 
+<br/>
 <br/>
 Additionally first pull request helped to merge changes for version 1.5 released in 2018-03-18:
 [https://github.com/juliagoda/CH341SER/pull/1](https://github.com/juliagoda/CH341SER/pull/1)
