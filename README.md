@@ -39,6 +39,19 @@ which helps to fix next problem below:
 `error: unknown type name ‘wait_queue_t’; did you mean ‘wait_event’?`
 
 <br/>
+added version check of kernel for signal.h:
+
+```
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4,11,0)
+#include <linux/signal.h>
+#else
+#include <linux/sched/signal.h>
+#endif
+```
+<br/>
+Thanks to hesaputra - #10
+
+<br/>
 Additionally first pull request helped to merge changes for version 1.5 released in 2018-03-18:
 [https://github.com/juliagoda/CH341SER/pull/1](https://github.com/juliagoda/CH341SER/pull/1)
 
