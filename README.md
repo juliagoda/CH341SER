@@ -138,7 +138,7 @@ sudo cp ch34x.ko.gz /usr/lib/modules/$(uname -r)/kernel/drivers/usb/serial
 <br/>
 
 if the command:  
-`lsmod | grep ch341` 
+`lsmod | grep ch34` 
 
 <br/>
 
