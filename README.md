@@ -138,16 +138,17 @@ sudo cp ch34x.ko.gz /usr/lib/modules/$(uname -r)/kernel/drivers/usb/serial
 <br/>
 
 if the command:  
-`lsmod | grep ch34` 
+`lsmod | grep ch341` 
 
 <br/>
 
-shows some result, then:  
+shows some result (but it doesn't have to), then:  
 ```
 sudo rmmod ch341
 sudo mv /usr/lib/modules/$(uname -r)/kernel/drivers/usb/serial/ch341.ko.gz /lib/modules/$(uname -r)/kernel/drivers/usb/serial/ch341.ko.gz~
-sudo depmod -a
 ```
+
+`sudo depmod -a`
 
 <br/>
 
