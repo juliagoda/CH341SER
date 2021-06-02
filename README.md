@@ -7,6 +7,7 @@
 5. [Official website](#official-website)  
 6. [Tutorial on Arch Linux](#tutorial-on-arch-linux)  
 7. [Compatibility](#compatibility)  
+8. [Fixing Problems](#fixing-problems)
 
 <br/>
 <br/>
@@ -225,3 +226,18 @@ It didn't work. I think, that the package was created for original arduino board
 ## Compatibility
 
 This driver is not compatible with the Olimex ESP32-POE rev C board
+
+## Fixing Problems
+
+if the dmesg command does not indicate ttyUSB, only:
+
+```
+[ 457.050482] usbserial: USB Serial support registered for ch34x
+1279.608531] ch34x 3-2:1.0: ch34x converter detected
+```
+
+then:
+1) some dependencies are missing (are not installed)
+2) at this stage the Arduino was connected not only to USB, but also to a prepared breadboard (you have to unplug cables connecting Arduino to breadboard)
+3) kernel hearders are missing (are not installed)
+4) It may happen, that kernel doesn't contain CONFIG_USB_SERIAL_CH341 flag, but you need it or it is disabled. You have to check configs of the kernel you are using
