@@ -1351,3 +1351,4 @@ static void __exit ch34x_exit(void)
 
 module_init( ch34x_init );
 module_exit( ch34x_exit );
+
