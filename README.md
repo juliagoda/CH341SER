@@ -40,7 +40,8 @@ which helps to fix next problem below:
 `error: unknown type name ‘wait_queue_t’; did you mean ‘wait_event’?`
 
 <br/>
-added version check of kernel for signal.h:
+
+added version check of kernel for signal.h:  
 
 ```
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4,11,0)
@@ -50,6 +51,14 @@ added version check of kernel for signal.h:
 #endif
 ```
 <br/>
+
+fixed:  
+```
+error: initialization from incompatible pointer type [-Werror=incompatible-pointer-types]
+```  
+<br/>
+
+
 Thanks to hesaputra - #10  
 
 <br/>
