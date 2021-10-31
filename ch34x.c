@@ -933,7 +933,7 @@ static int ch34x_write( struct usb_serial_port *port,
 static unsigned int ch34x_write_room( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27)
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27))
 static int ch34x_write_room( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
