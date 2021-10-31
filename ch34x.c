@@ -929,7 +929,11 @@ static int ch34x_write( struct usb_serial_port *port,
 	return count;
 }
 
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,13,0)) && GCC_VERSION >= 100100
+static unsigned int ch34x_write_room( struct tty_struct *tty )
+{
+	struct usb_serial_port *port = tty->driver_data;
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27)
 static int ch34x_write_room( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
@@ -955,7 +959,11 @@ static int ch34x_write_room( struct usb_serial_port *port )
 	return room;
 }
 
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,13,0)) && GCC_VERSION >= 100100
+static unsigned int ch34x_chars_in_buffer( struct tty_struct *tty )
+{
+	struct usb_serial_port *port = tty->driver_data;
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27))
 static int ch34x_chars_in_buffer( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
