@@ -41,7 +41,7 @@ which helps to fix next problem below:
 
 <br/>
 
-merged pull request #17 (sirlucjan) fixed:  
+merged pull request #17 (sirlucjan) and e-mail from zenon.ingielewicz@gmail.com fixed:  
 ```
 error: initialization from incompatible pointer type [-Werror=incompatible-pointer-types]
 ```  
