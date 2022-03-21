@@ -1,13 +1,14 @@
 # CH341SER driver
 
 1. [About driver](#about-driver)  
-2. [Changes](#changes)  
-3. [Tests](#tests)  
-4. [Installation](#installation)  
-5. [Official website](#official-website)  
-6. [Tutorial on Arch Linux](#tutorial-on-arch-linux)  
-7. [Compatibility](#compatibility)  
-8. [Fixing Problems](#fixing-problems)
+2. [Required dependencies](#required-dependencies)
+3. [Changes](#changes)  
+4. [Tests](#tests)  
+5. [Installation](#installation)  
+6. [Official website](#official-website)  
+7. [Tutorial on Arch Linux](#tutorial-on-arch-linux)  
+8. [Compatibility](#compatibility)  
+9. [Fixing Problems](#fixing-problems)
 
 <br/>
 <br/>
@@ -16,6 +17,14 @@
 
 It's a manufacturer software of standard serial to usb chip marked CH340
 
+<br/>
+<br/>
+
+## Required dependencies
+
+- linux-headers
+
+if you are using a different kernel, remember to install the headers for it, because the above package is for the standard linux kernel
 <br/>
 <br/>
 
