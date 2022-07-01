@@ -26,6 +26,10 @@ It's a manufacturer software of standard serial to usb chip marked CH340
 
 if you are using a different kernel, remember to install the headers for it, because the above package is for the standard linux kernel
 <br/>
+
+When using SecureBoot, you need to sign module. You can follow [this instruction](https://ubuntu.com/blog/how-to-sign-things-for-secure-boot)<br/>
+Otherwise `make load `can fail
+<br/>
 <br/>
 
 ## Changes
