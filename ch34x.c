@@ -340,7 +340,7 @@ static int set_control_lines( struct usb_serial *serial,
 {
 	int retval;
 
-	retval = ch34x_vendor_write( VENDOR_MODEM_OUT, (unsigned short)value,
+	retval = ch34x_vendor_write( VENDOR_MODEM_OUT, (unsigned short)~value,
 			0x0000, serial, NULL, 0x00 );
 	dbg_ch34x("%s - value=%d, retval=%d", __func__, value, retval );
 
