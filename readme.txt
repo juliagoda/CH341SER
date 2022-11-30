@@ -15,5 +15,10 @@ Usage:
 	#make load
 	//unload ch34x chips driver
 	#make unload
+	// Depending on the system in wich you are compiling you may need to do some of the procedures bellow to avoid hickups:
+	// First uninstall brltty (if you are blind **DO NOT DO THIS**) brltty helps peoples who can´t see to do things on system. 
+	// After compiling **sign the module** (needed in systems with secure boot enabled):
+	#kmodsign sha512 /var/lib/shim-signed/mok/MOK.priv /var/lib/shim-signed/mok/MOK.der ./ch34x.ko
+	// Then load the module 
 // 1.2 - 1.3 Fix some bugs			
 
