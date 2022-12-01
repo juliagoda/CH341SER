@@ -7,8 +7,9 @@
 5. [Installation](#installation)  
 6. [Official website](#official-website)  
 7. [Tutorial on Arch Linux](#tutorial-on-arch-linux)  
-8. [Compatibility](#compatibility)  
-9. [Fixing Problems](#fixing-problems)
+8. [Tutorial on Ubuntu](#tutorial-on-ubuntu)  
+9. [Compatibility](#compatibility)  
+10. [Fixing Problems](#fixing-problems)
 
 <br/>
 <br/>
