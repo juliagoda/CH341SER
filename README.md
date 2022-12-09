@@ -263,3 +263,4 @@ then:
 2) at this stage the Arduino was connected not only to USB, but also to a prepared breadboard (you have to unplug cables connecting Arduino to breadboard)
 3) kernel hearders are missing (are not installed)
 4) It may happen, that kernel doesn't contain CONFIG_USB_SERIAL_CH341 flag, but you need it or it is disabled. You have to check configs of the kernel you are using
+
