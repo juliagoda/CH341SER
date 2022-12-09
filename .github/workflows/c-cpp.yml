@@ -1,0 +1,22 @@
+name: CH341SER
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: initialize
+        uses: actions/checkout@v2
+      - name: update
+        run: |
+          sudo apt-get update -y
+          sudo apt-get upgrade -fy
+      - name: dependencies
+        run: sudo apt install -f -y linux-headers-$(uname -r)
+      - name: build
+        run: make
