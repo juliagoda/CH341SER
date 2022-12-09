@@ -934,11 +934,11 @@ static unsigned int ch34x_write_room( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
 #elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27))
-static int ch34x_write_room( struct tty_struct *tty )
+static unsigned int ch34x_write_room( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
 #else
-static int ch34x_write_room( struct usb_serial_port *port )
+static unsigned int ch34x_write_room( struct usb_serial_port *port )
 {
 #endif
 	struct ch34x_private *priv = usb_get_serial_port_data( port );
@@ -960,15 +960,15 @@ static int ch34x_write_room( struct usb_serial_port *port )
 }
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5,14,0)) && GCC_VERSION >= 100100
-static int ch34x_chars_in_buffer( struct tty_struct *tty )
+static unsigned int ch34x_chars_in_buffer( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
 #elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27))
-static int ch34x_chars_in_buffer( struct tty_struct *tty )
+static unsigned int ch34x_chars_in_buffer( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
 #else
-static int ch34x_chars_in_buffer( struct usb_serial_port *port )
+static unsigned int ch34x_chars_in_buffer( struct usb_serial_port *port )
 {
 #endif
 	struct ch34x_private *priv = usb_get_serial_port_data(port);
