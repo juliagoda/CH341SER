@@ -2,9 +2,9 @@ name: CH341SER
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "master", "ubuntu" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "master", "ubuntu" ]
 
 jobs:
   build-ubuntu:
