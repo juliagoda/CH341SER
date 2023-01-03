@@ -239,7 +239,7 @@ It didn't work. I think, that the package was created for original arduino board
 ## Tutorial on Ubuntu
 
  1. First uninstall brltty (if you are blind **DO NOT DO THIS**) brltty helps peoples who can´t see to do things on system.  
- 2. Download the source code: `git clone -b ubuntu git@github.com:juliagoda/CH341SER.git`
+ 2. Download the source code: `git clone -b ubuntu https://github.com/juliagoda/CH341SER.git`
  3. Goto the directory of the source code  
  4. Compile: `make`
  5. Sign the module (needed in systems with secure boot enabled) : `kmodsign sha512 /var/lib/shim-signed/mok/MOK.priv /var/lib/shim-signed/mok/MOK.der ./ch34x.ko`  
