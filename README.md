@@ -65,6 +65,11 @@ error: initialization from incompatible pointer type [-Werror=incompatible-point
 Thanks to hesaputra - #10  
 
 <br/>
+Added <b>const</b> to the line with <b>ch34x_set_termios</b>  
+
+Thanks to beautifulzzzz - [#30](https://github.com/juliagoda/CH341SER/issues/30)
+
+<br/>
 <br/>
 Additionally first pull request helped to merge changes for version 1.5 released in 2018-03-18:
 [https://github.com/juliagoda/CH341SER/pull/1](https://github.com/juliagoda/CH341SER/pull/1)
