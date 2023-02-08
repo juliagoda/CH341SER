@@ -397,9 +397,13 @@ static int ch34x_get_baud_rate( unsigned int baud_rate,
 	return 0;
 }
 
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6,0,1))
 static void ch34x_set_termios( struct tty_struct *tty,
 		struct usb_serial_port *port, const struct ktermios *old_termios )
+{
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,27))
+static void ch34x_set_termios( struct tty_struct *tty,
+		struct usb_serial_port *port, struct ktermios *old_termios )
 {
 #else
 static void ch34x_set_termios( struct usb_serial_port *port,
