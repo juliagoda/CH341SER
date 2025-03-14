@@ -1,3 +1,8 @@
+# IMPORTANT 
+
+This solution is long outdated and please use solutions from other repositories. By the way, this repo was created a long time ago for my own use, because the existing driver at the time did not work with my Arduino, and I needed it for my electronics lessons, so I'm shocked that it attracted so much attention. Thanks in advance for using it in the past and for the additional developmental help that took place.
+
+
 # CH341SER driver
 
 1. [About driver](#about-driver)  
